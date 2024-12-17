@@ -1,14 +1,11 @@
 <?php
-session_start(); // Начинаем сессию
+session_start(); 
 
-// Проверяем, была ли отправлена форма
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Сохраняем данные в сессии
     $_SESSION['order_type'] = $_POST['order_type'];
     $_SESSION['language'] = $_POST['language'];
     $_SESSION['delivery_method'] = $_POST['delivery_method'];
 
-    // Подключение к базе данных
     $servername = "localhost"; 
     $username = "root";       
     $password = "";            
@@ -20,20 +17,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Получаем данные из сессии
     $order_type = $_SESSION['order_type'] ?? '';
     $language = $_SESSION['language'] ?? '';
     $delivery_method = $_SESSION['delivery_method'] ?? '';
 
     if (!empty($order_type) && !empty($language) && !empty($delivery_method)) {  
-        // Вставляем данные в базу
         $sql = "INSERT INTO orders (type, language, delivery_method) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($sql);
 
         if ($stmt) {
             $stmt->bind_param("sss", $order_type, $language, $delivery_method);
             if ($stmt->execute()) {
-                // Перенаправление на страницу успеха
                 header('Location: success_page.html');
                 exit();
             } else {
@@ -150,3 +144,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </script>
 </body>
 </html>
+
