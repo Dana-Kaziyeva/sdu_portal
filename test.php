@@ -20,35 +20,65 @@ if (!isset($_SESSION['user_id'])) {
     exit(); // Завершаем выполнение скрипта, если student_id нет в сессии
 }
 // SQL query to join tables
-$sql = "SELECT c.name, c.code, t.first_name, tc.week_day, tc.start_time
+$sql = "SELECT c.name, c.code, t.first_name, tc.week_day, tc.start_time, tc.group_number, tc.type
         FROM teachercourse tc
         JOIN courses c ON tc.course_id = c.id
         JOIN teachers t ON tc.teacher_id = t.id";
 
-$sql_grades = "
-    SELECT 
-        courses.id,
-        grades.student_id,
-        grades.term
-FROM grades
-JOIN courses ON grades.course_id = courses.id
-WHERE grades.student_id = :student_id AND grades.term = : '2024-2025 1 Term'
-AND grades.term = :term
-ORDER BY courses.code
-";
 $result = $pdo->query($sql);
 $schedule = [];
-
 if ($result->rowCount() > 0) {
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         $day = strtolower($row['week_day']);
         $hour = $row['start_time'];
-        $course_info = $row['code'] . " " . $row['name'] . "<br>" . $row['first_name'];
+        // Check if the checkbox is checked via JS (we'll manage this in the frontend)
+        $course_info = $row['code'] . " [" . $row['group_number'] . "-" . $row['type'] . "]";
+        if (isset($_POST['tableToggleCheckbox']) && $_POST['tableToggleCheckbox'] == 'on') {
+            $course_info .= " " . $row['first_name'];
+        }
         $schedule[$day][$hour] = $course_info;
     }
 }
 
-$days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+$sql_grades = "
+    SELECT 
+        courses.name,
+        grades.grade,
+        grades.term
+        FROM grades
+        JOIN courses ON grades.course_id = courses.id
+        WHERE grades.student_id = :student_id AND grades.term = : '2024-2025 1 Term'
+        ORDER BY courses.code
+";
+$stmt = $pdo->prepare($sql_grades);
+$stmt->bindParam(':student_id', $student_id, PDO::PARAM_INT);
+$stmt->bindParam(':term', $term, PDO::PARAM_STR);
+
+
+    $grades = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $grades[$row['name']] = $row['grade'];
+    }
+
+$merged_schedule = [];
+foreach ($schedule as $day => $hours) {
+    foreach ($hours as $hour => $course_info) {
+        // Extract course code from the course info
+        preg_match('/([A-Z0-9]+)\s/', $course_info, $matches);
+        $course_code = $matches[1] ?? '';
+
+        // Check if grade is available for this course
+        if (isset($grades[$course_code])) {
+            // Append grade to the course info
+            $course_info .= "<br>Grade: " . $grades[$course_code];
+        }
+
+        // Store the updated course info in merged schedule
+        $merged_schedule[$day][$hour] = $course_info;
+    }
+}
+
+
 $hours = [
     "08:30:00", "09:30:00", "10:30:00", "11:30:00", "12:30:00",
     "13:30:00", "14:30:00", "15:30:00", "16:30:00", "17:30:00",
@@ -113,35 +143,75 @@ $hours = [
 </div>
 
 <!--MAIN PART-->
-<div style="padding-top: 10%; " >
-</div>
 
-<table class="timetable1">
-    <thead>
-    <tr>
-        <th>Day/Hour</th>
-        <?php foreach ($days as $day): ?>
-            <th><?php echo ucfirst($day); ?></th>
-        <?php endforeach; ?>
-    </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($hours as $hour): ?>
+<div style="padding-top: 5%; width: 100%; margin-left: 5%">
+    <span class="course-schedule">Course schedule</span>
+<!--    <div class="flex-row-effa" style="margin-left: 80%">-->
+<!--        <div class="form-check">-->
+<!--            <input class="form-check-input" type="checkbox" value="" id="tableToggleCheckbox">-->
+<!--        </div>-->
+<!--        <span class="details" >Details</span>-->
+<!--    </div>-->
+    <table class="timetable1" id="table1" style="width: 85%; margin-left: 5%; margin-top: 3%">
+        <thead>
         <tr>
-            <td><?php echo substr($hour, 0, 5); ?></td> <!-- Display hour (HH:MM) -->
-            <?php foreach ($days as $day): ?>
-                <td>
-                    <?php
-                    // Display course info if it exists for the day and hour
-                    echo isset($schedule[$day][$hour]) ? $schedule[$day][$hour] : '';
-                    ?>
-                </td>
-            <?php endforeach; ?>
+            <th>Day/Hour</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
         </tr>
-    <?php endforeach; ?>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($hours as $hour) {
+            echo "<tr><td>" . substr($hour, 0, 5) . "</td>"; // Display the time (only HH:MM)
+            foreach (['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'] as $day) {
+                echo "<td>";
+                if (isset($schedule[$day][$hour])) {
+                    echo $schedule[$day][$hour]; // Display the course information
+                }
+                echo "</td>";
+            }
+            echo "</tr>";
+        }
+        ?>
+        </tbody>
+    </table>
 
+    <!-- Table 2: Detailed Schedule (With Teacher's Name) -->
+    <table class="timetable2" id="table2" style="display: none; width: 85%; margin-left: 5%">
+        <thead>
+        <tr>
+            <th>Day/Hour</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        foreach ($hours as $hour) {
+            echo "<tr><td>" . substr($hour, 0, 5) . "</td>"; // Display the time (only HH:MM)
+            foreach (['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'] as $day) {
+                echo "<td>";
+                if (isset($schedule[$day][$hour])) {
+                    // Append teacher's name if checkbox is checked
+                    echo $schedule[$day][$hour] . " " . $row['first_name'];
+                }
+                echo "</td>";
+            }
+            echo "</tr>";
+        }
+        ?>
+        </tbody>
+    </table>
+</div>
 
 <!--      FOOTER -->
 <div class="rectangle-140">
