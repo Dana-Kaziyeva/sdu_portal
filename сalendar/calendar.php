@@ -19,7 +19,7 @@
 <!--  TOP BAR-->
       <div class="top-bar">
         <div class="left-section">
-            <a href="page.html">
+            <a href="../dashboard/page.php">
                 <img src="logo_sdu_general.png" alt="Logo" class="logo-img">
             </a>
         </div>
@@ -49,9 +49,9 @@
                   <i class="fa fa-user-o icon"></i>
               </a>
               <ul class="dropdown-menu" aria-labelledby="dropdown3">
-                <li><a class="dropdown-item" href="C:\Users\User\Downloads\PM-main (1)\PM-main\profile\profile.html">My Profile</a></li>
-                <li><a class="dropdown-item" href=" C:\Users\User\Downloads\PM-main (1)\PM-main\dashboard\page.html">My Dashboard</a></li>
-                <li><a class="dropdown-item" href="C:\Users\User\Downloads\PM-main (1)\PM-main\login page\login.html">Log Out</a></li>
+                  <li><a class="dropdown-item" href="../profile/profile.php">My Profile</a></li>
+                  <li><a class="dropdown-item" href="../dashboard/page.php">My Dashboard</a></li>
+                  <li><a class="dropdown-item" href="../login/login.php">Log Out</a></li>
               </ul>
           </li>
        </ul>

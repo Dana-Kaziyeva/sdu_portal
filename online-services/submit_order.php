@@ -61,14 +61,55 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
     <!--  TOP BAR-->
+    <div class="top-bar">
+        <div class="left-section">
+            <a href="../dashboard/page.php">
+                <img src="assets/logo_sdu_general.png" alt="Logo" class="logo-img">
+            </a>
+        </div>
+        <ul class="nav" style="width: 20%; padding-left: 4%;">
+            <li class="nav-item dropdown" style="margin-left: 10%;">
+                <a class="nav-link" href="#" id="dropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bell-o icon"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdown1">
+                    <li><a class="dropdown-item" href="#">Notification 1</a></li>
+                    <li><a class="dropdown-item" href="#">Notification 2</a></li>
+                    <li><a class="dropdown-item" href="#">Notification 3</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown" style="margin-left: -14%;">
+                <a class="nav-link" href="#" id="dropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-comment-o icon"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdown2">
+                    <li><a class="dropdown-item" href="#">Message 1</a></li>
+                    <li><a class="dropdown-item" href="#">Message 2</a></li>
+                    <li><a class="dropdown-item" href="#">Message 3</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown" style="margin-left: -14%;">
+                <a class="nav-link" href="#" id="dropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-user-o icon"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdown3">
+                    <li><a class="dropdown-item" href="../profile/profile.php">My Profile</a></li>
+                    <li><a class="dropdown-item" href="../dashboard/page.php">My Dashboard</a></li>
+                    <li><a class="dropdown-item" href="../login/login.php">Log Out</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 
-
-    <span class="online-services">Online services</span>
+    <div style="padding-top: 10% ">
+        <span class="online-services">Online services</span>
+    </div>
+<!--    <span class="online-services">Online services</span>-->
     <div class="flex-row-d">
         <div class="rectangle-2">
             <span class="send-order">Send order</span>
         </div>
-        <div class="rectangle-3"><span class="orders">Orders</span></div>
+<!--        <div class="rectangle-3"><span class="orders">Orders</span></div>-->
     </div>
 
     <form action="" method="POST">
@@ -126,6 +167,70 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="image"></div>
             <span class="order-successfully-sent">Order successfully sent!</span>
         </div>
+    </div>
+
+    <!--      FOOTER -->
+    <div class="rectangle-14">
+        <div class="line-15"></div>
+        <div class="flex-container">
+            <div class="flex-columns">
+                <span class="titles">SDU UNIVERSITY</span>
+                <a href="https://sdu.edu.kz/language/en/about-us-3/">
+                    <span class="nodes">About us</span>
+                </a>
+                <a href="https://sdukzlinks.tilda.ws/">
+                    <span class="nodes">Connect to us</span>
+                </a>
+            </div>
+
+            <div class="flex-columns">
+                <span class="titles">FACULTIES</span>
+                <a href="https://sdu.edu.kz/language/en/business-school/">
+                    <span class="nodes">SDU BUSINESS SCHOOL</span>
+                </a>
+                <a href="https://sdu.edu.kz/language/en/engineering-and-natural-sciences/">
+                    <span class="nodes">FACULTY OF ENGINEERING <br />AND NATURAL SCIENCES</span>
+                </a>
+                <a href="https://sdu.edu.kz/language/en/education-and-humanities/">
+                    <span class="nodes">FACULTY OF EDUCATION <br />AND HUMANITIES</span>
+                </a>
+                <a href="https://sdu.edu.kz/language/en/law-social-science/">
+                    <span class="nodes">FACULTY OF LAW AND <br />SOCIAL SCIENCES</span>
+                </a>
+            </div>
+
+            <div class="flex-columns">
+                <span class="titles">RULES</span>
+                <a href="https://sdu.edu.kz/language/en/rules/">
+                    <span class="nodes">Charter</span>
+                </a>
+                <a href="https://sdu.edu.kz/language/en/rules/">
+                    <span class="nodes">Safety rules</span>
+                </a>
+            </div>
+
+            <div class="flex-columns">
+                <span class="titles">ADDRESS</span>
+                <span class="nodes">Almaty region, Karasai district.</span>
+                <span class="nodes">040900, city of Kaskelen, st. <br />Abylai Khan 1/1</span>
+            </div>
+        </div>
+        <div class="line-17"></div>
+        <div class="flex-row-daab">
+            <div>
+                <i class="material-icons" >language</i>
+                <span class="nodes">SDU UNIVERSITY</span>
+            </div>
+            <div>
+                <i class="material-icons" >phone</i>
+                <span class="nodes">Mobile: + 7 727 307 9565</span>
+            </div>
+            <div>
+                <i class="material-icons" >mail_outline</i>
+                <span class="nodes">cdl@sdu.edu.kz</span>
+            </div>
+        </div>
+        <span class="copyright-reserved">Copyright © All right reserved SDU University</span>
     </div>
 
     <script>

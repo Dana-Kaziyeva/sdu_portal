@@ -93,7 +93,7 @@ foreach ($grades as $grade) {
 <!--  TOP BAR-->
 <div class="top-bar" style="width: 95%; ">
     <div class="left-section">
-        <a href="../dashboard/page.html">
+        <a href="../dashboard/page.php">
             <img src="../dashboard/assets/images/logo_sdu_general.png" alt="Logo" class="logo-img">
         </a>
     </div>

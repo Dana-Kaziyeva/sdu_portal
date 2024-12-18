@@ -91,8 +91,8 @@ $grades = $stmt_grades->fetchAll(PDO::FETCH_ASSOC);
 <!--  TOP BAR-->
 <div class="top-bar" style="width: 95%; ">
     <div class="left-section">
-        <a href="../dashboard/page.html">
-            <img src="../dashboard/assets/images/logo_sdu_general.png" alt="Logo" class="logo-img">
+        <a href="../dashboard/page.php">
+            <img src="assets/images/logo_sdu_general.png" alt="Logo" class="logo-img">
         </a>
     </div>
 

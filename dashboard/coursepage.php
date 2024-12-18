@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "student_portal";
+$dbname = "sdu_portal";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -63,14 +63,14 @@ $conn->close();
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="..\styles\dashboard_style.css" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 <!--  TOP BAR-->
 <div class="top-bar">
     <div class="left-section">
-        <a href="..\htmls\page.html">
-            <img src="..\assets\logo_sdu_general.png" alt="Logo" class="logo-img">
+        <a href="page.php">
+            <img src="assets/images/logo_sdu_general.png" alt="Logo" class="logo-img">
         </a>
     </div>
 
@@ -100,9 +100,9 @@ $conn->close();
                 <i class="fa fa-user-o icon"></i>
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdown3">
-                <li><a class="dropdown-item" href="..\htmls\profile.html">My Profile</a></li>
-                <li><a class="dropdown-item" href="..\htmls\page.html">My Dashboard</a></li>
-                <li><a class="dropdown-item" href="..\htmls\login.html">Log Out</a></li>
+                <li><a class="dropdown-item" href="../profile/profile.php">My Profile</a></li>
+                <li><a class="dropdown-item" href="../dashboard/page.php">My Dashboard</a></li>
+                <li><a class="dropdown-item" href="../login/login.php">Log Out</a></li>
             </ul>
         </li>
     </ul>
@@ -113,9 +113,9 @@ $conn->close();
 <div class="main-container">
     <div class="rectangle-2">
         <div class="flex-row-ac">
-            <div><a href="..\phps\coursepage.php?id=<?php echo $course_id; ?>" style="text-decoration: none; color: inherit"><span>Course</span></a></div>
-            <div><a href="..\pdfs\syllabus.pdf"><span>Syllabus</span></a></div>
-            <div><a href="..\htmls\grade.html" style="text-decoration: none; color: inherit" ><span>Grades</span></a></div>
+            <div><a href="coursepage.php?id=<?php echo $course_id; ?>" style="text-decoration: none; color: inherit"><span>Course</span></a></div>
+            <div><a href="assets/syllabus.pdf"><span>Syllabus</span></a></div>
+            <div><a href="grade.php?id=<?php echo $course_id; ?>" style="text-decoration: none; color: inherit" ><span>Grades</span></a></div>
         </div>
 
         <?php
@@ -132,12 +132,12 @@ $conn->close();
         ?>
 
         <div class="progress-container">
-            <span class="total">Total Grade: 15</span>
+            <span class="total">Total Grade: 1.85</span>
             <div class="progress-bar">
                 <div class="divider"></div>
-                <div class="progress-fill" ></div>
+<!--                <div class="progress-fill" ></div>-->
             </div>
-            <span id="percentage">7%</span>
+            <span id="percentage">0%</span>
         </div>
 
         <button id="toggleAllBtn" class="btn rectangle-9">Expand All<i class="material-icons" style="height: 100%; margin: 3% 0 0 1%">arrow_downward</i></button>

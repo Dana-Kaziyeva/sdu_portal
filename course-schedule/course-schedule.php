@@ -104,7 +104,7 @@ $hours = [
 <!--  TOP BAR-->
 <div class="top-bar">
     <div class="left-section">
-        <a href="page.html">
+        <a href="../dashboard/page.php">
             <img src="assets/logo_sdu_general.png" alt="Logo" class="logo-img">
         </a>
     </div>

@@ -70,7 +70,9 @@ if (isset($_GET['image']) && isset($_GET['id'])) {
 <!--  TOP BAR-->
 <div class="top-bar">
     <div class="left-section">
+        <a href="../dashboard/page.php">
             <img src="logo_sdu_general.png" alt="Logo" class="logo-img">
+        </a>
     </div>
    <ul class="nav" style="width: 20%; padding-left: 4%;">
       <li class="nav-item dropdown" style="margin-left: 10%;">
@@ -200,10 +202,10 @@ if (isset($_GET['image']) && isset($_GET['id'])) {
                 <a href="../registration/registration.php">
                     <img src="registration-icon.jpeg" alt="Registration Icon" class="icon">
                 </a>
-                <a href="/sdu_portal/сalendar/calendar.php">
+                <a href="../сalendar/calendar.php">
                     <img src="calendar-icon.jpeg" alt="Calendar Icon" class="icon">
                 </a>
-                <a href="/sdu_portal/online-services/submit_order.php">
+                <a href="../online-services/submit_order.php">
                     <img src="onlineservices-icon.png" alt="Online Service Icon" class="icon">
                 </a>
             </div>
